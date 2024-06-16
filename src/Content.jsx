@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { JobsIndex } from "./JobsIndex";
+import { JobsShow } from "./JobsShow";
 import { Modal } from "./Modal";
 
 export function Content() {
@@ -33,7 +34,7 @@ export function Content() {
     <main>
       <JobsIndex jobs={jobs} onShowJob={handleShowJob}/>
       <Modal show={isJobsShowVisible} onClose={handleClose}>
-        <h1>Test</h1>
+        <JobsShow job={currentJob} />
       </Modal>
     </main>
   )
