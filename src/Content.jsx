@@ -7,17 +7,28 @@ import { Modal } from "./Modal";
 import { Signup } from "./Signup";
 import { Login } from "./Login";
 import { LogoutLink } from "./LogoutLink";
+import { CompanyIndex } from "./CompanyIndex";
+import { Routes, Route } from "react-router-dom";
 
 export function Content() {
   const [jobs, setJobs] = useState([]);
   const [isJobsShowVisible, setIsJobsShowVisible] = useState(false);
   const [currentJob, setCurrentJob] = useState({});
+  const [companies, setCompany] = useState([]);
 
   const handleIndexJobs = () => {
     console.log("handleIndexJobs");
     axios.get("http://localhost:3000/jobs.json").then((response) => {
       console.log(response.data);
       setJobs(response.data);
+    });
+  };
+
+  const handleIndexCompanies = () => {
+    console.log("handleIndexCompanies");
+    axios.get("http://localhost:3000/companies.json").then((response) => {
+      console.log(response.data);
+      setCompany(response.data);
     });
   };
 
@@ -66,13 +77,23 @@ export function Content() {
   };
 
   useEffect(handleIndexJobs, []);
+  useEffect(handleIndexCompanies, []);
 
   return (
     <main>
+      <div>
+      <Routes>
+        <Route path="/companies" element={<CompanyIndex companies ={companies} />} />
+        
+
+      </Routes>
+      </div>
+
       <JobsNew onCreateJob={handleCreateJob} />
       <Signup /> <br />
       <Login />  <br />
       <LogoutLink />
+      
       <JobsIndex jobs={jobs} onShowJob={handleShowJob}/>
       <Modal show={isJobsShowVisible} onClose={handleClose}>
         <JobsShow job={currentJob} onUpdateJob={handleUpdateJob} onDestroyJob={handleDestroyJob} />
