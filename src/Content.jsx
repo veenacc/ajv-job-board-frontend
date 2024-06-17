@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { JobsIndex } from "./JobsIndex";
 import { JobsShow } from "./JobsShow";
 import { Modal } from "./Modal";
+import { Signup } from "./Signup";
+import { Login } from "./Login";
+import { LogoutLink } from "./LogoutLink";
 
 export function Content() {
   const [jobs, setJobs] = useState([]);
@@ -32,6 +35,9 @@ export function Content() {
 
   return (
     <main>
+      <Signup /> <br />
+      <Login />  <br />
+      <LogoutLink />
       <JobsIndex jobs={jobs} onShowJob={handleShowJob}/>
       <Modal show={isJobsShowVisible} onClose={handleClose}>
         <JobsShow job={currentJob} />
