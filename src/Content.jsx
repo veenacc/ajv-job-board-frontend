@@ -54,6 +54,14 @@ export function Content() {
     setIsJobsShowVisible(false);
   };
 
+  const handleDestroyJob = (id) => {
+    console.log("handleDestroyJob", id);
+    axios.delete(`http://localhost:3000/jobs/${id}.json`).then((response) => {
+      setJobs(jobs.filter((job) => job.id !== id));
+      handleClose();
+    });
+  };
+
   useEffect(handleIndexJobs, []);
 
   return (
@@ -61,7 +69,7 @@ export function Content() {
       <JobsNew onCreateJob={handleCreateJob} />
       <JobsIndex jobs={jobs} onShowJob={handleShowJob}/>
       <Modal show={isJobsShowVisible} onClose={handleClose}>
-        <JobsShow job={currentJob} onUpdateJob={handleUpdateJob} />
+        <JobsShow job={currentJob} onUpdateJob={handleUpdateJob} onDestroyJob={handleDestroyJob} />
       </Modal>
     </main>
   )

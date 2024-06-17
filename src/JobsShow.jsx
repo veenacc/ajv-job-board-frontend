@@ -6,6 +6,10 @@ export function JobsShow(props) {
     props.onUpdateJob(props.job.id, params, () => event.target.reset());
   };
 
+  const handleClick = () => {
+    props.onDestroyJob(props.job.id);
+  };
+
   return (
     <div>
       <h1>Job information</h1>
@@ -41,7 +45,7 @@ export function JobsShow(props) {
         </div>
         <button type="submit">Update job</button>
       </form>
-
+      <button onClick={handleClick}>Destroy job</button>
     </div>
   );
 }
