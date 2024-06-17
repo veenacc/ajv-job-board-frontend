@@ -8,6 +8,7 @@ import { Signup } from "./Signup";
 import { Login } from "./Login";
 import { LogoutLink } from "./LogoutLink";
 import { CompanyIndex } from "./CompanyIndex";
+import { Routes, Route } from "react-router-dom";
 
 export function Content() {
   const [jobs, setJobs] = useState([]);
@@ -80,11 +81,19 @@ export function Content() {
 
   return (
     <main>
+      <div>
+      <Routes>
+        <Route path="/companies" element={<CompanyIndex companies ={companies} />} />
+        
+
+      </Routes>
+      </div>
+
       <JobsNew onCreateJob={handleCreateJob} />
       <Signup /> <br />
       <Login />  <br />
       <LogoutLink />
-      <CompanyIndex companies ={companies} />
+      
       <JobsIndex jobs={jobs} onShowJob={handleShowJob}/>
       <Modal show={isJobsShowVisible} onClose={handleClose}>
         <JobsShow job={currentJob} onUpdateJob={handleUpdateJob} onDestroyJob={handleDestroyJob} />
