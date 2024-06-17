@@ -4,6 +4,9 @@ import { JobsIndex } from "./JobsIndex";
 import { JobsNew } from "./JobsNew";
 import { JobsShow } from "./JobsShow";
 import { Modal } from "./Modal";
+import { Signup } from "./Signup";
+import { Login } from "./Login";
+import { LogoutLink } from "./LogoutLink";
 
 export function Content() {
   const [jobs, setJobs] = useState([]);
@@ -67,6 +70,9 @@ export function Content() {
   return (
     <main>
       <JobsNew onCreateJob={handleCreateJob} />
+      <Signup /> <br />
+      <Login />  <br />
+      <LogoutLink />
       <JobsIndex jobs={jobs} onShowJob={handleShowJob}/>
       <Modal show={isJobsShowVisible} onClose={handleClose}>
         <JobsShow job={currentJob} onUpdateJob={handleUpdateJob} onDestroyJob={handleDestroyJob} />
